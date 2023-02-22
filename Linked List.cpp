@@ -129,8 +129,38 @@ int RMax(struct Node *p)
     // return x > p->data ? x : p->data;
 }
 
+struct Node *LSearch(Node *p, int key)
+{
+    while (p != NULL)
+    {
+        if (key == p->data)
+        {
+            return p;
+        }
+        p = p->next;
+    }
+    return NULL;
+}
+
+struct Node *RSearch(Node *p, int key)
+{
+    if (p == NULL)
+    {
+        return NULL;
+    }
+
+    if (key == p->data)
+    {
+        return p;
+    }
+
+    return RSearch(p->next, key);
+}
+
 int main()
 {
+	int key;
+    struct Node *temp;
     int A[] = {5, 10, 15, 20, 25, 30, 35, 40, 45, 50};
     create(A, 10);
 
@@ -165,6 +195,32 @@ int main()
     cout << "The Max Value in Linked List for RMax Function is: ";
     printf("%d", RMax(first));
     cout << endl;
+
+    cout << "\nEnter a Key to Find: ";
+    cin >> key;
+
+    temp = LSearch(first, key);
+    if (temp != NULL)
+    {
+        printf("\nKey is Found %d", temp->data);
+    }
+    else
+    {
+        printf("\nKey not Found");
+    }
+
+    cout << "\nEnter a Key to Find: ";
+    cin >> key;
+
+    temp = RSearch(first, key);
+    if (temp != NULL)
+    {
+        printf("\nKey is Found %d", temp->data);
+    }
+    else
+    {
+        printf("\nKey not Found");
+    }
 
     return 0;
 }
